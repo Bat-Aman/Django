@@ -1,27 +1,12 @@
-{% load staticfiles %}
-<html>
-
-<head>
-  <title>Aman's Blog</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-
-<body>
-  <nav id="navbar">
-    <a href="http://amanjain.pythonanywhere.com" class="link-0">Aman Jain&nbsp; | &nbsp;Blog</a>
-    <a href="#" class="link-1"><i class="fa fa-github" ></i></a>
-    <a href="#" class="link-1"><i class="fa fa-twitter"></i></a>
-    <a href="#" class="link-1"><i class="fa fa-reddit-alien"></i></a>
-    <a href="#" class="link-1"><i class="fa fa-linkedin"></i></a>
-    <a href="#" class="link-1"><i class="fa fa-facebook"></i></a>
-  </nav>
-</body>
-
-</html>
+{% extends 'blog/base.html' %}
+{% block content %}
+  {% for post in posts %}
+    <div class="post">
+      <div class="date">
+        <p>published on: {{ post.published_date }}</p>
+      </div>
+      <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+      <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
